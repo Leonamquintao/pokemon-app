@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HttpServiceProvider {
@@ -7,7 +8,7 @@ export class HttpServiceProvider {
   private headers: any
   private options: any
 
-  private url: string = 'http://pokeapi.co/api/v2/pokemon/';
+  private url: string = 'http://pokeapi.salestock.net/api/v2/';
 
   constructor(private http: Http) {
     this.headers = new Headers({ 'Content-Type': 'application/json'});
@@ -16,30 +17,20 @@ export class HttpServiceProvider {
 
   /*------------------------------- USERS ----------------------------------*/
 
-  public createNewUser(params) {
-    return this.http.post(this.url+'users', params, this.options);
+  public getAllPokemons() {
+    return this.http.get(this.url+'pokemon/', this.options);
   }
 
-  public getUser(params) {
-    return this.http.post(this.url+'user', params, this.options);
+  public getPokemonStats(name) {
+    return this.http.get(this.url+'pokemon/'+name+'/', this.options);
   }
 
-  /*------------------------------- CONTACTS ----------------------------------*/
-
-  public listAllContactsByUser(id) {
-    return this.http.get(this.url+'user/'+id+'/contacts', this.options);
+  public getPokemonImage(name) {
+    return this.http.get(this.url+'pokemon-form/'+name+'/', this.options);
   }
 
-  public saveNewContact(id, dt) {
-    return this.http.post(this.url+'user/'+id+'/contact', dt, this.options);
-  }
-
-  public updateContact(id, dt) {
-    return this.http.put(this.url+'user/'+id+'/contact/'+dt.id, dt, this.options)
-  }
-
-  public deleteContactById(id, conId) {
-    return this.http.delete(this.url+'user/'+id+'/contact/'+conId, this.options)
+  public setPage(pag) {
+    return this.http.get(this.url+'pokemon/'+pag, this.options);
   }
 
 }

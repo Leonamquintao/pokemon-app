@@ -1,8 +1,56 @@
 <div class="home-page">
   <div class="container">
     <div class="header">
-      home works!
+      <img src="assets/images/pokemon-logo.png" alt="Pokemon app">
       <button class="btn btn-light" (click)="exit()">Sair</button>
+    </div>
+
+    <ng4-loading-spinner
+      [threshold]="2000"
+      [template]="template"
+      [loadingText]="'Aguarde por favor...'"
+      [zIndex]="9999">
+    </ng4-loading-spinner>
+
+    <div class="row">
+      <div class="col">
+
+        <div class="form-group search">
+          <input class="form-control" type="text" name="searchText" placeholder="type to search..." [(ngModel)]="searchText">
+        </div>
+
+        <div class="item-card"
+          *ngFor="let pokemon of pokemonList | filterText: 'name': searchText; let i = index"
+          (click)="renderPokemon(pokemon)">
+          <div class='col1'>
+            <img src="assets/images/pokeball.png" alt="">
+          </div>
+          <div class='col2'>
+            <p>{{ pokemon.name }}</p>
+          </div>
+        </div>
+
+        <div class="float-left">
+          <button type="button" class="btn btn-link" (click)="renderPreviusPage()">Previus</button>
+          <button type="button" class="btn btn-link" (click)="renderNextPage()">Next</button>
+        </div>
+
+      </div>
+
+      <div class="col">
+
+        <div class="pokemon-painel" *ngIf="pokemon.name.length > 0">
+
+          <h2>{{ pokemon.name }}</h2>
+
+          <img src="{{ pokemon.front_default }}" alt="">
+          <img src="{{ pokemon.front_shiny }}" alt="">
+          <img src="{{ pokemon.back_default }}" alt="">
+          <img src="{{ pokemon.back_shiny }}" alt="">
+          <br><br>
+          <button class="btn btn-primary btn-large" (click)="pokemonStats(pokemon.name)">ver mais...</button>
+        </div>
+      </div>
     </div>
   </div>
 
