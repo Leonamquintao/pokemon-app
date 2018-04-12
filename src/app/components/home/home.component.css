@@ -1,0 +1,16 @@
+.home-page {
+  width: 90%;
+  margin: auto;
+  text-align: center;
+
+}
+
+.header {
+  padding: 10px;
+  height: 60px;
+  background-color: #ddd;
+}
+
+.header button {
+  float: right;
+}

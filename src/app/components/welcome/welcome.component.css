@@ -1,0 +1,24 @@
+.welcome-page {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.content {
+  margin-top: 60px;
+}
+
+.content h1 {
+  font-size: 24px;
+  color: #d31749;
+}
+
+.content img {
+  width: 20%;
+  height: auto;
+}
+
+.alert-area {
+  margin: 20px;
+  height: 50px;
+}
