@@ -7,14 +7,26 @@
     [zIndex]="9999">
   </ng4-loading-spinner>
 
-  <div class="container">
+  <div class="container" *ngIf="pokemon.forms && pokemon.moves">
 
     <h1>{{ pokemon.name }}</h1>
 
     <img src="{{ status.front_default }}" >
-    <img src="{{ status.front_shiny }}" >
     <img src="{{ status.back_default }}" >
+    <img src="{{ status.front_shiny }}" >
     <img src="{{ status.back_shiny }}" >
+
+    <p>Base XP: {{ pokemon.base_experience }}</p>
+    <p>Forms: {{ pokemon.forms.length }}</p>
+    <p>Moves: {{ pokemon.moves.length }}</p>
+    <p>Weight: {{ pokemon.weight }}Kg</p>
+
+    <h3>Abilities</h3>
+    <div class="abilities-area">
+      <p *ngFor="let ability of pokemon.abilities"> {{ ability.ability.name }}</p>
+    </div>
+
+    <button class="btn btn-primary btn-lg" (click)="back()">Voltar</button>
 
   </div>
 

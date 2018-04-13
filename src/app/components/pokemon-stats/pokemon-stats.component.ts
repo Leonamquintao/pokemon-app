@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpServiceProvider } from '../../services/http-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
@@ -15,9 +15,10 @@ export class PokemonStatsComponent implements OnInit {
   private status: any;
 
   constructor(private route: ActivatedRoute,
+  private router: Router,
   private httpService: HttpServiceProvider,
   private spinnerService: Ng4LoadingSpinnerService) {
-    
+
     this.status = { front_default: '', front_shiny: '', back_default: '', back_shiny: '' }
   }
 
@@ -47,6 +48,10 @@ export class PokemonStatsComponent implements OnInit {
         this.spinnerService.hide();
       })
     })
+  }
+
+  private back() {
+    this.router.navigate(['home']);
   }
 
 }
