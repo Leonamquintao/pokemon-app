@@ -1,3 +1,21 @@
-<p>
-  pokemon-stats works recieve {{ pokemon }}!
-</p>
+<div class="stats-page">
+
+  <ng4-loading-spinner
+    [threshold]="2000"
+    [template]="template"
+    [loadingText]="'Aguarde por favor...'"
+    [zIndex]="9999">
+  </ng4-loading-spinner>
+
+  <div class="container">
+
+    <h1>{{ pokemon.name }}</h1>
+
+    <img src="{{ status.front_default }}" >
+    <img src="{{ status.front_shiny }}" >
+    <img src="{{ status.back_default }}" >
+    <img src="{{ status.back_shiny }}" >
+
+  </div>
+
+</div>

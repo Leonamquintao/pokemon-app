@@ -56,3 +56,8 @@
 .pokemon-painel {
   margin: 50px;
 }
+
+.pokemon-painel img {
+  width: 200px;
+  height: auto;
+}

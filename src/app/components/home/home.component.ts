@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router,
   private httpService: HttpServiceProvider,
   private spinnerService: Ng4LoadingSpinnerService) {
-    this.pokemon = { url: '', name: '', front_default: '', front_shiny: '', back_default: '',  back_shiny: ''};
+    this.pokemon = { url: '', name: '', front_default: '' };
   }
 
   ngOnInit() {
@@ -51,9 +51,6 @@ export class HomeComponent implements OnInit {
       let resp = res.json();
       this.pokemon.name = resp.name;
       this.pokemon.front_default = resp.sprites.front_default;
-      this.pokemon.front_shiny = resp.sprites.front_shiny;
-      this.pokemon.back_default = resp.sprites.back_default;
-      this.pokemon.back_shiny = resp.sprites.back_shiny;
       this.spinnerService.hide();
     })
 
