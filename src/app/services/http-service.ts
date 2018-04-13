@@ -30,7 +30,7 @@ export class HttpServiceProvider {
   }
 
   public setPage(pag) {
-    return this.http.get(this.url+'pokemon/'+pag, this.options);
+    return this.http.get(pag, this.options);
   }
 
 }

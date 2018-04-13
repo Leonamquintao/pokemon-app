@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Observable} from "rxjs/Observable";
 import { HttpServiceProvider } from '../../services/http-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import 'rxjs/add/operator/map';
+
+interface AppState {
+  message: string,
+  nextPage: string,
+  previusPage: string,
+  pokemonStored: any
+}
 
 @Component({
   selector: 'app-home',
@@ -15,29 +20,24 @@ export class HomeComponent implements OnInit {
 
   private pokemonList: any;
   private pokemon: any;
+  private next: any;
+  private previous: any;
 
-  constructor(private router: Router, private httpService: HttpServiceProvider,
+  constructor(private router: Router,
+  private httpService: HttpServiceProvider,
   private spinnerService: Ng4LoadingSpinnerService) {
     this.pokemon = { url: '', name: '', front_default: '', front_shiny: '', back_default: '',  back_shiny: ''};
   }
 
   ngOnInit() {
     this.getPokemonsList();
-
-    // this.pokemonList = [
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/1/", name: "bulbasaur" },
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/7/", name: "squirtle" },
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/9/", name: "blastoise" },
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/11/", name: "metapod" },
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/17/", name: "pidgeotto" },
-    //   { url: "http://pokeapi.salestock.net/api/v2/pokemon/19/", name: "rattata" },
-    // ]
   }
 
   private getPokemonsList() {
     this.spinnerService.show();
     this.httpService.getAllPokemons().subscribe((resp) => {
       this.pokemonList = resp.json().results;
+      this.next = resp.json().next;
       this.spinnerService.hide();
     }, err => {
       console.log('error ', err);
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   private pokemonStats(name) {
-    this.router.navigate(['pokemon-stats']);
+    this.router.navigate(['pokemon-stats', name ]);
   }
 
   private exit() {
@@ -71,16 +71,25 @@ export class HomeComponent implements OnInit {
   private renderNextPage() {
     this.spinnerService.show();
     this.pokemonList = [];
-    this.spinnerService.hide();
-
+    let pg = this.next
+    this.httpService.setPage(pg).subscribe((res)=> {
+      this.pokemonList = res.json().results;
+      this.next = res.json().next;
+      this.previous = res.json().previous;
+      this.spinnerService.hide();
+    })
   }
 
   private renderPreviusPage() {
     this.spinnerService.show();
     this.pokemonList = [];
-
-    this.spinnerService.hide();
-
+    let pg = this.previous
+    this.httpService.setPage(pg).subscribe((res)=> {
+      this.pokemonList = res.json().results;
+      this.next = res.json().next;
+      this.previous = res.json().previous;
+      this.spinnerService.hide();
+    })
   }
 
 }

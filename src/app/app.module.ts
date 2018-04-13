@@ -9,8 +9,9 @@ import { HttpServiceProvider } from './services/http-service';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HomeComponent } from './components/home/home.component';
-import { FilterTextPipe } from './filter-text.pipe';
+import { PokemonStatsComponent } from './components/pokemon-stats/pokemon-stats.component';
 
+import { FilterTextPipe } from './filter-text.pipe';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
@@ -19,14 +20,15 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     AppComponent,
     WelcomeComponent,
     HomeComponent,
-    FilterTextPipe
+    FilterTextPipe,
+    PokemonStatsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     AppRoutingModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule,
   ],
   providers: [HttpServiceProvider],
   bootstrap: [AppComponent]
